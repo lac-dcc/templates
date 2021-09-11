@@ -1,0 +1,36 @@
+%%% Copyright (C) 2021  Luigi D. C. Soares
+%%% 
+%%% This program is free software: you can redistribute it and/or modify
+%%% it under the terms of the GNU General Public License as published by
+%%% the Free Software Foundation, either version 3 of the License, or
+%%% (at your option) any later version.
+%%% 
+%%% This program is distributed in the hope that it will be useful,
+%%% but WITHOUT ANY WARRANTY; without even the implied warranty of
+%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%%% GNU General Public License for more details.
+%%% 
+%%% You should have received a copy of the GNU General Public License
+%%% along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+\begin{tikzpicture}[remember picture, overlay]
+    \draw[fill=gray, fill opacity=0.1]
+    ([shift={(-.5cm, .3cm)}] pic cs:sc:st) 
+    rectangle 
+    ([shift={(.25cm, -.15cm)}] pic cs:sc:end);
+    
+    \draw[Stealth-, decorate, decoration={snake,
+        amplitude=.4mm, segment length=4.75mm, 
+        pre length=1.75mm, post length=.25mm}
+    ]
+        ([shift={(.3cm, .25cm)}] pic cs:sc:end)
+        --
+        ([shift={(2.5cm, .25cm)}] pic cs:sc:end)
+        node[right, align=left] {\tikzmark{sc-text:st}
+            \large\emph{Side channel}\tikzmark{sc-text:end}};
+            
+    \draw[fill=gray, fill opacity=0.1]
+        ([shift={(-0.05cm, .5cm)}] pic cs:sc-text:st)
+        rectangle
+        ([shift={(0.2cm, -.3cm)}] pic cs:sc-text:end);
+\end{tikzpicture}

@@ -1,0 +1,76 @@
+%%% Copyright (C) 2021  Luigi D. C. Soares
+%%% 
+%%% This program is free software: you can redistribute it and/or modify
+%%% it under the terms of the GNU General Public License as published by
+%%% the Free Software Foundation, either version 3 of the License, or
+%%% (at your option) any later version.
+%%% 
+%%% This program is distributed in the hope that it will be useful,
+%%% but WITHOUT ANY WARRANTY; without even the implied warranty of
+%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%%% GNU General Public License for more details.
+%%% 
+%%% You should have received a copy of the GNU General Public License
+%%% along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% Frame Title %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\defbeamertemplate*{frametitle}{texsx}[1][]{
+    \begin{beamercolorbox}[
+        wd=\paperwidth, ht=\frametitleheight]{frametitle}
+    \begin{tikzpicture}
+        \useasboundingbox (0,0) rectangle(\paperwidth, 1.2);
+        \fill[darkred] 
+            (.5, .3) rectangle (.8, .9);
+        \ifx\insertframesubtitle\@empty%
+            {\node[anchor=west, white, font=\bfseries\Large] 
+                at (1.1, 0.61){\insertframetitle};}
+        \else%
+            {\node[anchor= west, white, font=\bfseries\Large] 
+                at (1.1, 0.81){\insertframetitle};%
+            \node[anchor= west, white, font=\bfseries\small]
+                at (1.1, 0.41){\insertframesubtitle};}%
+        \fi
+    \end{tikzpicture}
+    \end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Footline %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% It contains the author (e.g. name and/or email), short   %%%
+%%% title, institute, date and page number.                  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\defbeamertemplate*{footline}{saori}{
+    \leavevmode
+    \begin{beamercolorbox}[
+        wd = .33\paperwidth, dp = .30\footlineheight, center
+    ]{footline author}
+        \usebeamerfont{footline}\insertshortauthor
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[
+        wd = .34\paperwidth, dp = .30\footlineheight, center
+    ]{footline author}
+        \usebeamerfont{footline}\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[
+        wd = .25\paperwidth, dp = .30\footlineheight, right
+    ]{footline author}
+        \usebeamerfont{footline}\insertshortinstitute
+        \hskip .1cm\relax
+        (\insertshortdate)
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[
+        wd = .08\paperwidth, dp = .30\footlineheight, center
+    ]{footline author}
+        \usebeamerfont{footline}
+        \insertpagenumber/\insertpresentationendpage
+    \end{beamercolorbox}%
+}
+
+
+\mode<all>

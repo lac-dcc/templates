@@ -1,0 +1,53 @@
+%%% Copyright (C) 2021  Luigi D. C. Soares
+%%% 
+%%% This program is free software: you can redistribute it and/or modify
+%%% it under the terms of the GNU General Public License as published by
+%%% the Free Software Foundation, either version 3 of the License, or
+%%% (at your option) any later version.
+%%% 
+%%% This program is distributed in the hope that it will be useful,
+%%% but WITHOUT ANY WARRANTY; without even the implied warranty of
+%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%%% GNU General Public License for more details.
+%%% 
+%%% You should have received a copy of the GNU General Public License
+%%% along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+\begin{frame}{Password Checker}
+\stepcounter{beamerpauses}
+\begin{example}<+->
+    Consider the case of a $n$-bit password checker
+    \only<+->{that either rejects the $i$-th bit or accepts the user's guess.}
+    \only<+->{It could be implemented as follows:}
+    \only<+->{\inputminted{idris}{include/code/check.idr}}
+    \only<+->{\input{include/tikz/side-channel}}
+\end{example}
+\end{frame}
+
+\begin{frame}{Password Checker}
+\stepcounter{beamerpauses}
+\begin{example}
+    Consider, again, the case of a $n$-bit password checker.
+    \only<+->{%
+        But, this time it either rejects or accepts the
+        entire guessed password.}
+    \only<+->{It could be implemented as follows:}
+    \only<+->{\inputminted{idris}{include/code/check-safe.idr}}
+\end{example}
+\end{frame}
+
+\begin{frame}{Password Checker}
+\inputminted{idris}{include/code/check-safe.idr}
+\begin{itemize}
+    \item<2-| alert@2> Function ctsel stands for
+        constant-time selector
+        
+    \item<3-| alert@3> Corresponds to x86's cmov
+    
+    \item<4-| alert@4> LLVM's x86-cmov-converter pass
+        replaces cmovs with branches
+        
+    \item<5-| alert@5> How to prove that the constant-time property
+        is preserved?
+\end{itemize}
+\end{frame}

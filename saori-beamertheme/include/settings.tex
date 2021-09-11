@@ -1,0 +1,112 @@
+%%% Copyright (C) 2021  Luigi D. C. Soares
+%%% 
+%%% This program is free software: you can redistribute it and/or modify
+%%% it under the terms of the GNU General Public License as published by
+%%% the Free Software Foundation, either version 3 of the License, or
+%%% (at your option) any later version.
+%%% 
+%%% This program is distributed in the hope that it will be useful,
+%%% but WITHOUT ANY WARRANTY; without even the implied warranty of
+%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%%% GNU General Public License for more details.
+%%% 
+%%% You should have received a copy of the GNU General Public License
+%%% along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{stmaryrd}
+\usepackage{minted}
+\usepackage{tikz}
+\usepackage[style=authoryear, citestyle=authortitle]{biblatex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% Logo Positioning %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\logo{\begin{tikzpicture}[overlay, remember picture]
+    \node[left=0.2cm] at ([yshift=-1cm] current page.north east)
+        {\includegraphics
+        [width=.125\paperwidth, keepaspectratio]{logo.png}};
+\end{tikzpicture}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% Other Settings %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% By default, every numbered environment share the same
+%%% counter as theorem. We can redefine them so that they
+%%% have their own counter. Notice, however, that the Beamer
+%%% user guide strongly discourages that, because this way
+%%% there might be, for example, a Definition 2 after a
+%%% Theorem 10, which (according to them) make things harder
+%%% to find. Personally, I disagree; I find it weird to have,
+%%% for instance, an Example 2 without an Example 1.
+\undef{\example}
+\theoremstyle{example}
+\newtheorem{example}{Example}
+%%% We can also disable numbering entirely:
+% \setbeamertemplate{theorems}[default]
+
+%%% Make math font look line in articles.
+\usefonttheme[onlymath]{serif}
+
+%%% Math operators.
+\DeclareMathOperator{\Def}{\coloneqq}
+
+\makeatletter
+\newcommand{\To}{\@ifstar{\@ToB}{\@ToA}}
+\newcommand{\@ToA}[1]{\xrightarrow{#1}}
+\newcommand{\@ToB}[2]{%
+  \xrightarrow{#1}\mathrel{\vphantom{\to}^{#2}}}
+\makeatother
+
+%%% Minted config.
+\usemintedstyle{monokai}
+\renewcommand\theFancyVerbLine{\arabic{FancyVerbLine}}
+\setminted[idris]{
+    fontfamily=courier,
+    frame=lines,
+    framesep=2mm,
+    breaklines,
+    linenos,
+    numbersep=5pt,
+    stripnl=false,
+    autogobble,
+    escapeinside=@@
+}
+
+%%% Tikz config.
+%%% Libraries:
+\usetikzlibrary{
+    arrows.meta,
+    decorations.pathmorphing,
+    positioning,
+    tikzmark}
+%%% TikZ style to apply keys only on specific beamer overlays
+%%% only=<overlay spec>{key=value, key=value, ...}
+\tikzset{only/.code args={<#1>#2}{%
+  \only<#1>{\pgfkeysalso{#2}}%
+}}
+%%% Default tikz origin coordinates to the center of the page.
+%%% Use \shifttikz{<node>}{<shift x>}{<shift y>}{<tikz picture>}
+%%% to shift the origin of a tikz picture. For this to work, your
+%%% tikz picture must have the following option:
+%%% shift = {([xshift = \tikzxshift, yshift = \tikzyshift] \tikzorigin)}
+\newcommand{\tikzorigin}{current page.center}
+\newlength{\tikzxshift}
+\newlength{\tikzyshift}
+\setlength{\tikzxshift}{0cm}
+\setlength{\tikzyshift}{0cm}
+\newcommand{\shifttikz}[4]{{%
+    \renewcommand{\tikzorigin}{#1}%
+    \setlength{\tikzxshift}{#2}%
+    \setlength{\tikzyshift}{#3}%
+    #4%
+}}
+
+%%% References file.
+\addbibresource{references.bib}

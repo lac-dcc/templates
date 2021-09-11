@@ -1,0 +1,68 @@
+%%% Copyright (C) 2021  Luigi D. C. Soares
+%%% 
+%%% This program is free software: you can redistribute it and/or modify
+%%% it under the terms of the GNU General Public License as published by
+%%% the Free Software Foundation, either version 3 of the License, or
+%%% (at your option) any later version.
+%%% 
+%%% This program is distributed in the hope that it will be useful,
+%%% but WITHOUT ANY WARRANTY; without even the implied warranty of
+%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%%% GNU General Public License for more details.
+%%% 
+%%% You should have received a copy of the GNU General Public License
+%%% along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%% Custom Colors %%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{darkred}{HTML}{b23525}
+\definecolor{background}{HTML}{404053}
+\definecolor{footmid}{HTML}{33335c}
+\definecolor{footleft}{HTML}{262652}
+\definecolor{footright}{HTML}{262652}
+\definecolor{item}{HTML}{b23525}
+\definecolor{blocktitle}{HTML}{7B4B33}
+\definecolor{blockbody}{HTML}{3B3B50}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Settings %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamercolor*{title page header}{fg=white}
+\setbeamercolor*{footline author}{fg=white}
+\setbeamercolor*{footline title}{fg=white}
+\setbeamercolor*{footline date and page}{fg=white}
+\setbeamercolor*{date}{fg=white}
+\setbeamercolor*{normal text}{fg=white}
+%%% Define color for the alerted text. By default, it is the same
+%%% as normal text but in bold (see beamerfont file)
+\setbeamercolor*{alerted text}{fg=white}
+\setbeamercolor*{qed symbol}{bg=white}
+%%% Define subitem and subsubitems with the same color as items.
+%%% One can change that by specifying other fg and bg colors.
+\setbeamercolor*{item projected}{bg=item, fg=white}
+\setbeamercolor*{itemize item}{fg=item}
+\setbeamercolor*{enumerate item}{fg=white}
+\setbeamercolor*{itemize subitem}{parent=itemize item}
+\setbeamercolor*{itemize subsubitem}{parent=itemize item}
+\setbeamercolor*{enumerate subitem}{parent=itemize item}
+\setbeamercolor*{enumerate subsubitem}{parent=itemize item}
+%%% Define alerted and example blocks with the same color as
+%%% normal blocks. One can change that by specifying other fg
+%%% and bg colors.
+\setbeamercolor*{block title}{fg=white, bg=blocktitle}
+\setbeamercolor*{block body}{fg=white, bg=blockbody}
+\setbeamercolor*{block title example}{parent=block title}
+\setbeamercolor*{block title alerted}{parent=block title}
+\setbeamercolor*{block body example}{parent=block body}
+\setbeamercolor*{block body alerted}{parent=block body}
+%%% Bibliography colors.
+\setbeamercolor*{bibliography entry title}{fg=white}
+\setbeamercolor*{bibliography entry author}{fg=white}
+\setbeamercolor*{bibliography entry location}{fg=white}
+\setbeamercolor*{bibliography entry note}{fg=white}
+
+\mode
+<all>

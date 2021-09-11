@@ -1,0 +1,59 @@
+%%% Copyright (C) 2021  Luigi D. C. Soares
+%%% 
+%%% This program is free software: you can redistribute it and/or modify
+%%% it under the terms of the GNU General Public License as published by
+%%% the Free Software Foundation, either version 3 of the License, or
+%%% (at your option) any later version.
+%%% 
+%%% This program is distributed in the hope that it will be useful,
+%%% but WITHOUT ANY WARRANTY; without even the implied warranty of
+%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%%% GNU General Public License for more details.
+%%% 
+%%% You should have received a copy of the GNU General Public License
+%%% along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Beamer Options %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% t = frames default to top alignment
+%%% Aspect ratio: 43 = 4:3, 169 = 16:9, ...
+\documentclass[t, aspectratio=169]{beamer}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% Custom Settings %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{include/settings}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% Information to be included in the title page %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title[Secure Compilation]{%
+    On the Secure Compilation of the Constant-Time 
+    Policy}
+\subtitle{Quantitative Information Flow}
+\author[luigi.domenico@dcc.ufmg.br]{%
+    Luigi D. C. Soares\texorpdfstring{\\}{}
+    (\texttt{luigi.domenico@dcc.ufmg.br})}
+\institute[DCC/UFMG]{%
+    Department of Computer Science \\
+    Federal University of Minas Gerais}
+\date[2021/1]{}
+
+\usetheme{saori}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\input{include/frames/side-channels}
+\input{include/frames/defense}
+\input{include/frames/pw-checker}
+\input{include/frames/secure}
+\input{include/frames/qif-relation}
+\input{include/frames/references}
+
+\end{document}

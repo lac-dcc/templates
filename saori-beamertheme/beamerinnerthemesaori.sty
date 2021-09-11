@@ -1,0 +1,107 @@
+%%% Copyright (C) 2021  Luigi D. C. Soares
+%%% 
+%%% This program is free software: you can redistribute it and/or modify
+%%% it under the terms of the GNU General Public License as published by
+%%% the Free Software Foundation, either version 3 of the License, or
+%%% (at your option) any later version.
+%%% 
+%%% This program is distributed in the hope that it will be useful,
+%%% but WITHOUT ANY WARRANTY; without even the implied warranty of
+%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%%% GNU General Public License for more details.
+%%% 
+%%% You should have received a copy of the GNU General Public License
+%%% along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+\mode<presentation>
+
+\setbeamertemplate{background}{
+    \begin{tikzpicture}
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%% Background %%%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        \fill[color=background]
+            (0, 0)
+            rectangle
+            (\paperwidth, \paperheight);
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%% Footline %%%%%%%%%%%%%%%%%%%%%%
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        \fill[color=footleft]
+            (0, 0)
+            rectangle
+            (.33\paperwidth, \footlineheight);
+        \fill[color=footmid]
+            (.33\paperwidth, 0)
+            rectangle
+            (.67\paperwidth, \footlineheight);
+        \fill[color=footright]
+            (.67\paperwidth, 0)
+            rectangle
+            (\paperwidth, \footlineheight);
+    \end{tikzpicture}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% The multiple \hfill are used to center the title page
+%%% content, regardless of the chosen aspect ratio.
+\defbeamertemplate*{title page}{saori}{
+    \vskip .2\paperheight\relax
+    \begin{beamercolorbox}[wd=.9\paperwidth, center, sep=8pt]
+    {title page header}
+        \usebeamerfont{title}\bfseries\inserttitle\par
+    \end{beamercolorbox}%
+    \hfill{}
+    \vskip .025\paperheight\relax
+    \begin{beamercolorbox}[wd=.9\paperwidth, center, sep=8pt]
+    {title page header}
+        \usebeamerfont{subtitle}\insertsubtitle\par
+    \end{beamercolorbox}%
+    \hfill{}
+    \vskip .025\paperheight\relax
+    \begin{beamercolorbox}[wd=.9\paperwidth, center, sep=8pt]
+    {title page header}
+        \usebeamerfont{author}\insertauthor\par
+    \end{beamercolorbox}%
+    \hfill{}
+    \vfill{}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Items %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Place enumerate items inside circles. The easy way is to %%%
+%%% do like \setbeamertemplate{enumerate items}[circle], but %%%
+%%% with tikz we can control the inner space.                %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\defbeamertemplate*{enumerate item}{saori}{
+    \usebeamercolor{item projected}
+    \usebeamerfont{item projected}
+    \tikz[baseline=(X.base)]{
+        \node[fill=bg, text=fg, inner sep=1.25pt, circle]
+            (X)
+            {\insertenumlabel};
+    }
+}
+\defbeamertemplate*{enumerate subitem}{saori}{
+    \usebeamercolor{item projected}
+    \usebeamerfont{item projected}
+    \tikz[baseline=(X.base)]{
+        \node[fill=bg, text=fg, inner sep=1.25pt, circle]
+            (X)
+            {\insertsubenumlabel};
+    }
+}
+\defbeamertemplate*{enumerate subsubitem}{saori}{
+    \usebeamercolor{item projected}
+    \usebeamerfont{item projected}
+    \tikz[baseline=(X.base)]{
+        \node[fill=bg, text=fg, inner sep=1.25pt, circle]
+            (X)
+            {\insertsubsubenumlabel};
+    }
+}
+
+\mode<all>

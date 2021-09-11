@@ -1,0 +1,207 @@
+%%% Copyright (C) 2021  Luigi D. C. Soares
+%%% 
+%%% This program is free software: you can redistribute it and/or modify
+%%% it under the terms of the GNU General Public License as published by
+%%% the Free Software Foundation, either version 3 of the License, or
+%%% (at your option) any later version.
+%%% 
+%%% This program is distributed in the hope that it will be useful,
+%%% but WITHOUT ANY WARRANTY; without even the implied warranty of
+%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%%% GNU General Public License for more details.
+%%% 
+%%% You should have received a copy of the GNU General Public License
+%%% along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+\begin{frame}{Secure Compilation}
+\begin{itemize}
+    \item<2-| alert@2> \cite{BartheSecure}
+    % \item<2-| alert@2> Secure Compilation of Side-Channel Countermeasures:
+    % The Case of Cryptographic ``Constant-Time'' --
+    % Gilles Barthe, Benjamin Grégoire, Vincent Laporte
+    
+    \item<3-| alert@3> Observational non-interference
+    \item<4-| alert@4> Constant-time simulations
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Secure Compilation}
+\begin{itemize}
+    \item<2-| alert@2-3> A state is of the form 
+    $\left\{c, \rho\right\}$,
+    \only<3->{where $c$ is a command and $\rho$ is an environment}
+    
+    \item<4-| alert@4> A program $P$ is composed by a sequence of
+    commands
+    
+    \item<5-| alert@5-> The semantics of $P$ is modelled by
+    labelled transitions of the form \[a \To*{t}{n} a',\]
+    \only<6->{%
+        where $a$ and $a'$ are states, $t$ is the leakage
+        and $n$ is the number of steps}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Secure Compilation}
+\begin{definition}[Observational Non-Interference]
+    Let $P(\mathcal{I})$ be the set of initial states of a
+    program $P$ that is given a set $\mathcal{I}$ of inputs,
+    \only<2->{let $\mathcal{S}$ be the set of states,}
+    \only<3->{$\mathcal{S}_f$ the set of final states and}
+    \only<4->{$\mathcal{L}$ the set of leakage.}
+    \only<5->{%
+        Then, $P$ is obs. non-interfering w.r.t.
+        a binary relation $\phi$ on states,}
+    \only<6->{written $P \models \mathrm{ONI}(\phi),$}
+    \only<7->{%
+        iff for all $a, a' \in P(\mathcal{I})$,
+        $b, b' \in \mathcal{S}$ and
+        $t, t' \in \mathcal{L}$,}
+    \only<8->{%
+        \[
+            a \To*{t}{n} b \land a' \To*{t'}{n} b' \land
+            a \mathbin{\phi} a' \implies
+            t = t' \land 
+            (b \in \mathcal{S}_f \iff b' \in \mathcal{S}_f).
+        \]}
+\end{definition}
+\end{frame}
+
+\begin{frame}{Secure Compilation}
+\begin{definition}[Lockstep Simulation]
+    $\approx$ is a lockstep simulation w.r.t. source and
+    target programs $S$ and $C = \llbracket S\rrbracket$ when
+    \begin{enumerate}
+        \item<only@2-> $\forall$ source step $a \to b$ and
+        target state $\alpha$ such that
+        $a \approx \alpha$,
+        \only<only@3->{%
+            $\exists$ a target step $\alpha \to \beta$ such
+            that $b \approx \beta$}
+
+        \item<only@3-> $\forall$ input parameter $i$,
+        we have $S(i) \approx C(i)$
+        
+        \item<only@4-> $\forall$ source and target states
+        $b$ and $\beta$ such that $b \approx \beta$,
+        \only<5->{%
+            we have that $b$ is a final source state iff
+            $\beta$ is a final target state}
+    \end{enumerate}
+\end{definition}
+\end{frame}
+
+\begin{frame}{Secure Compilation}
+\input{include/tikz/sim}
+\end{frame}
+
+\begin{frame}{Secure Compilation}
+\begin{definition}[Lockstep CT-Simulation]
+    $(\equiv_S, \equiv_C)$ is a lockstep CT-simulation w.r.t.
+    $\approx$ iff:
+    \begin{enumerate}
+        \item<only@2-> $\forall$ source steps
+        $a \To{t} b$ and $a' \To{t} b'$ such that
+        $a \equiv_S a'$, and
+        \only<3->{%
+            $\forall$ target steps $\alpha \To{\tau} \beta$
+            and $\alpha' \To{\tau'} \beta'$ such that
+            $a \approx \alpha$, $a' \approx \alpha'$, 
+            $\alpha \equiv_C \alpha'$, $b \approx \beta$
+            and $b' \approx \beta'$}
+        \only<4->{%
+            it follows that $b \equiv_S b'$, $\beta \equiv_C \beta'$
+            and $\tau = \tau'$}
+            
+        \item<only@5-> $\forall$ pairs of input parameters
+        $i$ and $i'$ such that $i \mathbin{\varphi} i'$,
+        \only<6->{we have that $S(i) \equiv_S S(i')$ and
+        $C(i) \equiv_C C(i')$, where $\varphi$ is a binary
+        relation on inputs}
+    \end{enumerate}
+\end{definition}
+\end{frame}
+
+\begin{frame}{Secure Compilation}
+\input{include/tikz/ct-sim}
+\end{frame}
+
+\begin{frame}{Secure Compilation}
+\begin{itemize}
+    \item<+-> Let $[e]_{\rho}$ be the value of expression $e$
+    under environment $\rho$
+    \item<+-> Let $a.\mathrm{cmd}$ and $a.\mathrm{env}$ be the
+    components of state $a$
+\end{itemize}
+
+\begin{example}[Constant Folding]<+->
+    Constant folding reduces expressions whose operands are known. For example:
+    \begin{enumerate}
+        \item<only@+-> $
+            \left(\forall \rho : [e_1]_{\rho} = 0\right)
+            \implies
+            \llbracket x \Def e_1 * e_2\rrbracket = x \Def 0
+        $
+        
+        \item<only@+-> $
+            \left(\forall \rho : [e_1]_{\rho} = 1\right)
+            \implies
+            \llbracket x \Def e_1 * e_2\rrbracket = x \Def e_2
+        $
+    \end{enumerate}
+    
+    \only<+->{Thus, it suffices to define}
+    \begin{enumerate}
+        \item<only@+-> $\approx$ as
+        $
+            \llbracket a.\mathrm{cmd}\rrbracket = \alpha.\mathrm{cmd}
+            \land
+            a.\mathrm{env} = \alpha.\mathrm{env}
+        $ and
+        
+        \item<only@+-> $\equiv_S$ and $\equiv_C$ as
+        $
+            a.\mathrm{cmd} = b.\mathrm{cmd}
+        $
+    \end{enumerate}
+\end{example}
+\end{frame}
+
+\begin{frame}{Secure Compilation}
+\stepcounter{beamerpauses}
+\begin{columns}
+    \begin{column}{.5\textwidth}
+        \begin{itemize}
+            \item<+-> Let $a.\mathrm{cmd}$ and $a'.\mathrm{cmd}$
+            be $y \Def A[i] * k$
+            
+            \item<+-> Let $b.\mathrm{cmd}$ and $b'.\mathrm{cmd}$ 
+            be $z \Def x + y$
+            
+            \item<+-> Suppose $k$ always evaluates to $0$
+            
+            \item<+-> Then $\alpha.\mathrm{cmd}$ $\alpha'.\mathrm{cmd}$ 
+            are $y \Def 0$
+            
+            \item<+-> Similarly, $\beta.\mathrm{cmd}$ and 
+            $\beta'.\mathrm{cmd}$ are $z \Def x$
+            
+            \item<+-> $
+                t = t' \cdot \left(A, [i]_{\rho_a}\right)
+            $ and
+            $
+                [i]_{\rho_{a}} = [i]_{\rho_{a'}}
+            $
+            
+            \item<+-> What is the leakage $\tau$ and is it the same
+            in both steps?
+            
+            \item<+-> $\tau = \tau'$
+        \end{itemize}
+    \end{column}
+    \begin{column}{.5\textwidth}
+        \shifttikz{current page.east}{-.5\textwidth}{0cm}
+            {\input{include/tikz/ct-sim}}
+    \end{column}
+\end{columns}
+\end{frame}

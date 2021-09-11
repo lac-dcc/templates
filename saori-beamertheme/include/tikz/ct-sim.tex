@@ -1,0 +1,78 @@
+%%% Copyright (C) 2021  Luigi D. C. Soares
+%%% 
+%%% This program is free software: you can redistribute it and/or modify
+%%% it under the terms of the GNU General Public License as published by
+%%% the Free Software Foundation, either version 3 of the License, or
+%%% (at your option) any later version.
+%%% 
+%%% This program is distributed in the hope that it will be useful,
+%%% but WITHOUT ANY WARRANTY; without even the implied warranty of
+%%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+%%% GNU General Public License for more details.
+%%% 
+%%% You should have received a copy of the GNU General Public License
+%%% along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+\begin{tikzpicture}[
+    remember picture,
+    overlay,
+    shift = {([xshift = \tikzxshift, yshift = \tikzyshift] \tikzorigin)},
+    font=\Large,
+    equivcolor/.store in = \equivcolor,
+    equivcolor = white,
+    equiv/.style = {
+        color = \equivcolor,
+        %%% Draw the extremities of the \equiv symbol: 
+        %%% first draw a very thick line and then draw
+        %%% another line with the background color; 
+        preaction = {
+            draw, line width = 3.8pt, color = \equivcolor,
+            postaction = {
+                draw,
+                line width = 2.2pt, color = background,
+                shorten >= -.1cm, shorten <= -.1cm
+            }
+        }
+    }
+]
+    \node (a)  at (-3.25cm, 1.25cm) {$a$};
+    \node (a') at (-2cm, 2.5cm)     {$a'$};
+    \node (b)  at (0.75cm, 1.25cm)  {$b$};
+    \node (b') at (2cm, 2.5cm)      {$b'$};
+    
+    \node (alpha)  at (-3.25cm,-2.75cm) {$\alpha$};
+    \node (alpha') at (-2cm, -1.5cm)    {$\alpha'$};
+    \node (beta)   at (0.75cm, -2.75cm) {$\beta$};
+    \node (beta')  at (2cm, -1.5cm)   {$\beta'$};
+    
+    \draw [-Latex, thick] 
+        (a) -- (b) node [midway, above] {$t$};    
+    \draw [-Latex, thick] 
+        (a') -- (b') node [midway, above] {$t$};
+    
+    \draw [-Latex, thick]
+        (alpha) -- (beta)
+        node [midway, above, color = darkred!83] {$\bm{\tau}$};
+    \draw [-Latex, thick]
+        (alpha') -- (beta')
+        node [midway, above, color = darkred!83] {$\bm{\tau}$};
+    
+    \draw [thick, dotted, shorten >= .1cm, shorten <= .1cm]
+        (a) -- (alpha)
+        node [midway, left] {$\approx$};    
+    \draw [thick, dotted, shorten >= .1cm, shorten <= .1cm]
+        (a') -- (alpha')
+        node [midway, left] {$\approx$};
+    
+    \draw [thick, dotted, shorten >= .1cm, shorten <= .1cm]
+        (b) -- (beta)
+        node [midway, right] {$\approx$};    
+    \draw [thick, dotted, shorten >= .1cm, shorten <= .1cm]
+        (b') -- (beta')
+        node [midway, right] {$\approx$};
+        
+    \draw [thick, equiv] (a) -- (a');
+    \draw [thick, equiv, equivcolor = darkred!83] (b) -- (b');
+    \draw [thick, equiv] (alpha) -- (alpha');
+    \draw [thick, equiv, equivcolor = darkred!83] (beta) -- (beta');
+\end{tikzpicture}
